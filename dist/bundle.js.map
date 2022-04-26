@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","mappings":";;;;;AAAA,MAAMA,QAAQ,GAAG,MAAMC,OAAO,CAACC,GAARD,CAAY,OAAZA,CAAvB;;AACAD,QAAQ,G","sources":["webpack://react-diplom/./src/index.js"],"sourcesContent":["const sayHello = () => console.log('hello');\nsayHello();"],"names":["sayHello","console","log"],"sourceRoot":""}
