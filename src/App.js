@@ -3,7 +3,7 @@ import { Routes, Switch, Route, BrowserRouter } from 'react-router-dom'
 // import GlobalWrapper from './core/Global';
 import { Provider } from 'mobx-react';
 // import configureStore from './core/configureStore'
-import Menu from './pages/Menu';
+import Home from './pages/Home';
 import Menu2 from './pages/Menu2';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
     <Provider>
         <BrowserRouter>
           <Routes>
-                <Route path={'/'} element={<Menu />} />
+                <Route path={'/'} element={<Home />} />
                 {/* <Route path={'/'} element={<Menu2 />} /> */}
           </Routes>
         </BrowserRouter>
