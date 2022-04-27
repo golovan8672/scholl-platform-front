@@ -50,7 +50,7 @@ module.exports = {
               use: ['html-loader']
             }, // Добавляем загрузчик для html
             {
-              test: /\.(sa|sc|c)ss$/,
+              test: /\.scss$/,
               // exclude: /node_modules/,
               use: [
                 'isomorphic-style-loader',

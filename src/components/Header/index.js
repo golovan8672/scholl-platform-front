@@ -1,22 +1,23 @@
 import { IconButton } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom'
-import classes from './Header.scss'
+import s from './Header.scss'
+import ws from 'isomorphic-style-loader/withStyles'
 
 const Header = () => {
   return (
-    <div className={classes.header}>
-      <div className={classes.headerContainer}>
-        <div className={classes.menu}>
+    <div className={s.header}>
+      <div className={s.headerContainer}>
+        <div className={s.menu}>
           <Link to='/'>
             <IconButton aria-label="menu"/>
           </Link>
         </div>
-        <div className={classes.profile}>
+        <div className={s.profile}>
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+export default ws(s)(Header);

@@ -1,18 +1,17 @@
 .header {
-  height: 70;
-  padding-left: 18;
-  padding-right: 20;
+  height: 70px;
+  padding-left: 18px;
+  padding-right: 20px;
   top: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 44%, rgba(247, 247, 247, 0.4) 50%, rgba(255, 255, 255, 0));
+}
 
-  .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    justify-items: center;
-    height: 100%;
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  height: 100%;
+}
 
-    .menu {
-      display: flex;
-    }
-  }
+.menu {
+  display: flex;
 }
