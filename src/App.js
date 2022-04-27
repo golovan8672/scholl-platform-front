@@ -1,10 +1,8 @@
 import React from 'react'
 import { Routes, Switch, Route, BrowserRouter } from 'react-router-dom'
-// import GlobalWrapper from './core/Global';
 import { Provider } from 'mobx-react';
-// import configureStore from './core/configureStore'
-import Home from './pages/Home';
-import Menu2 from './pages/Menu2';
+import Home from './pages/Home/Home';
+import Menu2 from './pages/Home/MenuUser';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 const App = () => {

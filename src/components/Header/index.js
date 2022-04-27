@@ -1,49 +1,34 @@
-import { Box, IconButton } from '@mui/material';
-// import { Box } from '@mui/system';
 import React from 'react';
-import { Link } from 'react-router-dom'
-<<<<<<< HEAD
 import s from './Header.scss'
 import ws from 'isomorphic-style-loader/withStyles'
+import {AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = () => {
   return (
-    <div className={s.header}>
-      <div className={s.headerContainer}>
-        <div className={s.menu}>
-          <Link to='/'>
-            <IconButton aria-label="menu"/>
-          </Link>
-        </div>
-        <div className={s.profile}>
-        </div>
-      </div>
-    </div>
-=======
-import classes from './Header.scss'
-// import ws from 'isomorphic-style-loader/withStyles'
-
-const Header = () => {
-  return (
-    <Box sx={{
-      height: 80,
-      top: 0,
-      transition: 'all 0.3s ease',
-      backgroundColor: '#222A45',
-      opacity: 0.8
-    }}
-    >
-      <Box>
-        <Box>
-          <Link to='/'>
-            <IconButton aria-label="menu"/>
-          </Link>
-        </Box>
-        <Box>
-        </Box>
-      </Box>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar className={s.header}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            News
+          </Typography>
+          <Avatar
+            alt="Remy Sharp"
+            // src="/static/images/avatar/1.jpg"
+            sx={{ width: 40, height: 40 }}
+          />
+        </Toolbar>
+      </AppBar>
     </Box>
->>>>>>> 7c274ab5de052741650db424bdc68574db5dce1f
   );
 };
 
