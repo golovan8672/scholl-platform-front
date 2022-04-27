@@ -4,20 +4,20 @@ import MenuAdmin from "./MenuAdmin";
 import s from './Home.scss'
 import ws from 'isomorphic-style-loader/withStyles'
 
-const role = 'user';
+const role = 'admin';
 
 const Home = () => {
     return (
-        <React.Fragment>
+        <div className={s.wrapper}>
             <Header />
             <div className={s.container}>
             {
-                role === 'user' ?
+                role === 'admin' ?
                 <MenuAdmin /> :
                 <MenuUser />
             }
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 

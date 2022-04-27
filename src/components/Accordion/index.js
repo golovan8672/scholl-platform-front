@@ -1,12 +1,20 @@
-import React from "react";
-import MenuCard from "../../components/MenuCard";
-import ws from 'isomorphic-style-loader/withStyles'
-import s from './Home.scss'
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const MenuAdmin = () => {
-    return (
-        <div className={s.card}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+export default function ControlledAccordions() {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
+  return (
+    <div>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -78,8 +86,6 @@ const MenuAdmin = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-        </div>
-    )
+    </div>
+  );
 }
-
-export default ws(s)(MenuAdmin)

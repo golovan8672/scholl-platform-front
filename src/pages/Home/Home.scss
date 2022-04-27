@@ -1,11 +1,19 @@
+.wrapper {
+    margin: -8px;
+    background: #d2d4dc;
+    height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding: 15px;
 }
 
 .card {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
