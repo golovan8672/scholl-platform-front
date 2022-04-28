@@ -1,0 +1,94 @@
+.cardWrap {
+  transform-style: preserve-3d;
+  transform: perspective(100rem);
+}
+
+.cardContainer {
+  --rX: 0;
+  --rY: 0;
+  --bX: 50%;
+  --bY: 80%;
+
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid var(--background-color);
+  border-radius: 1.6rem;
+  padding: 4rem;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  position: relative;
+  transform: rotateX(calc(var(--rX) * 1deg)) rotateY(calc(var(--rY) * 1deg));
+
+  background: linear-gradient(hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1)), url("https://images.unsplash.com/photo-1559113513-d5e09c78b9dd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9");
+  background-position: var(--bX) var(--bY);
+  background-size: 20rem auto;
+  box-shadow: 0 0 3rem .5rem hsla(0, 0%, 0%, .2);
+
+  transition: transform .6s 1s;
+}
+
+.cardContainer::before,
+.cardContainer::after {
+  content: "";
+
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #fff;
+
+  position: absolute;
+  z-index: 2;
+
+  opacity: .3;
+  transition: .3s;
+}
+
+.cardContainer::before {
+  top: 2rem;
+  right: 2rem;
+
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.cardContainer::after {
+  bottom: 2rem;
+  left: 2rem;
+
+  border-top-width: 0;
+  border-right-width: 0;
+}
+
+.containerActive {
+  transition: none;
+}
+
+.containerDef {
+  filter: hue-rotate(160deg) saturate(140%);
+}
+
+.cardContainer p {
+  color: hsla(0, 0%, 100%, .6);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cardWrap:hover .cardContainer::before,
+.cardWrap:hover .cardContainer::after {
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+}
+
+.content {
+  display: flex;
+  flex-direction: column
+}
+
+.image {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 0 3rem .5rem hsla(0, 0%, 0%, .2);
+}

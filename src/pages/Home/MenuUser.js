@@ -7,7 +7,7 @@ const userMenuContent = [
     {
         id: 1,
         title: 'Новости',
-        imageSrc: '',
+        imageSrc: 'https://img.freepik.com/free-photo/book-with-green-board-background_1150-3836.jpg?t=st=1651149490~exp=1651150090~hmac=325c211261a3bfd2869ec162d54cbf65850f6a1538624c3a59f0a41e78ae6d0c&w=1380',
         description: ''
     },
     {
