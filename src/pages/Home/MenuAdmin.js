@@ -9,6 +9,7 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MenuCard from "../../components/MenuCard";
 import CreateUser from "../../components/CreateUser";
+import settings from '../../assets/settings.png';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -83,7 +84,7 @@ const MenuAdmin = () => {
         </Accordion>
       </Grid>
       <Grid sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item md={5}>
-        <MenuCard card={{ title: 'Управление классами' }} />
+        <MenuCard card={{ title: 'Управление классами', imageSrc: settings}} />
       </Grid>
     </Grid>
   )

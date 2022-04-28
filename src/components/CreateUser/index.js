@@ -93,7 +93,7 @@ const CreateUser = ({userInfo, userRole}) => {
             </Grid>
           </Grid>
         </div>
-        <div className>
+        <div>
           <Button
             color="primary"
             variant="contained"

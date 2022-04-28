@@ -2,28 +2,32 @@ import React from "react";
 import MenuCard from "../../components/MenuCard";
 import ws from 'isomorphic-style-loader/withStyles'
 import s from './Home.scss'
+import ocenky from '../../assets/scale_1200.jpeg'
+import klass from '../../assets/klass.jpg'
+import raspisanie from '../../assets/raspisanie.jpeg'
+import news from '../../assets/news.png'
 
 const userMenuContent = [
     {
         id: 1,
         title: 'Новости',
-        imageSrc: 'https://img.freepik.com/free-photo/book-with-green-board-background_1150-3836.jpg?t=st=1651149490~exp=1651150090~hmac=325c211261a3bfd2869ec162d54cbf65850f6a1538624c3a59f0a41e78ae6d0c&w=1380',
+        imageSrc: news,
         description: ''
     },
     {
         id: 2,
         title: 'Мой класс',
-        imageSrc: '',
+        imageSrc: klass,
         description: ''
     },{
         id: 3,
         title: 'Мое расписание',
-        imageSrc: '',
+        imageSrc: raspisanie,
         description: ''
     },{
         id: 4,
         title: 'Мои оценки',
-        imageSrc: '',
+        imageSrc: ocenky,
         description: ''
     }
 ]

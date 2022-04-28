@@ -9,6 +9,7 @@ import ws from 'isomorphic-style-loader/withStyles'
 import s from './MenuCard.scss'
 import clsx from 'clsx'
 import { Box } from '@mui/material';
+import Tilt from 'react-vanilla-tilt'
 
 const MenuCard = ({ card }) => {
   const {
@@ -18,14 +19,16 @@ const MenuCard = ({ card }) => {
   } = card;
 
   return (
-    <Box className={s.cardWrap}>
-      <Box sx={{backgroundColor: 'primary.light'}} className={clsx(s.cardContainer, s.containerDef)}>
-        <Box className={s.content}>
-          <img className={s.image} src={imageSrc} />
-          <Typography>{title}</Typography>
-        </Box>
-      </Box>
-    </Box>
+    <Tilt options={{ scale: 2, max: 35,  perspective: 100 }}>
+      <div className={s.cardWrap}>
+        <div className={clsx(s.cardContainer, s.containerDef)}>
+          <div className={s.content}>
+            <img className={s.image} src={imageSrc} />
+            <Typography>{title}</Typography>
+          </div>
+        </div>
+      </div>
+    </Tilt>
 
   );
 }
