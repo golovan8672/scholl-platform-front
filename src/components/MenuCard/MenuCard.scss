@@ -1,8 +1,4 @@
-.cardWrap {
-}
-
 .cardContainer {
-
   width: 10rem;
   height: 10rem;
   border-radius: 1.6rem;
@@ -24,8 +20,8 @@
   position: absolute;
   z-index: 2;
 
-  opacity: .3;
-  transition: .3s;
+  opacity: 0.6;
+  transition: 0.3s;
 }
 
 .cardContainer::before {
