@@ -5,9 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-// import ws from 'isomorphic-style-loader/withStyles'
+import ws from 'isomorphic-style-loader/withStyles'
+import s from './MenuCard.scss'
+import clsx from 'clsx'
+import { Box } from '@mui/material';
+import Tilt from 'react-vanilla-tilt'
 
-const MenuCard = ({card}) => {
+const MenuCard = ({ card }) => {
   const {
     title,
     imageSrc,
@@ -15,28 +19,18 @@ const MenuCard = ({card}) => {
   } = card;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        // image="/static/images/cards/contemplative-reptile.jpg"
-        alt="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    <Tilt options={{ scale: 2, max: 35,  perspective: 100 }}>
+      <div className={s.cardWrap}>
+        <div className={clsx(s.cardContainer, s.containerDef)}>
+          <div className={s.content}>
+            <img className={s.image} src={imageSrc} />
+            <Typography>{title}</Typography>
+          </div>
+        </div>
+      </div>
+    </Tilt>
+
   );
 }
 
-export default MenuCard
+export default ws(s)(MenuCard)

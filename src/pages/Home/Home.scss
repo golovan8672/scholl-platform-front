@@ -1,21 +1,34 @@
 .wrapper {
     margin: -8px;
-    background: #d2d4dc;
+    --background-color: hsl(180, 20%, 90%);
+    color: hsla(0, 0%, 0%, 0.6);
+    background: var(--background-color);
+    text-align: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 15px;
 }
 
 .card {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.card > div {
+    margin: 0 4rem 4rem 4rem !important;
 }
 
 .accordion {

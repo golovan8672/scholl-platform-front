@@ -1,0 +1,39 @@
+.card {
+  width: 500px;
+  --background-color: hsl(180, 20%, 90%);
+  color: hsla(0, 0%, 0%, .6);
+  background: var(--background-color);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.userInfo div {
+  margin-bottom: 1rem;
+}
+
+.userInfo p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.userDesc {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
