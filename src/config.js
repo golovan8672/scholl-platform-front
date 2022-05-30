@@ -1,1 +1,1 @@
-export const api = 'https://dsc-system.herokuapp.com'
+export const api = 'https://studplatformapi.herokuapp.com'

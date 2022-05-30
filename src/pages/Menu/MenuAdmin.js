@@ -1,6 +1,6 @@
 import React from "react";
 import ws from 'isomorphic-style-loader/withStyles'
-import s from './Home.scss'
+import s from './Menu.scss'
 import { Typography, Grid, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -10,6 +10,8 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MenuCard from "../../components/MenuCard";
 import CreateUser from "../../components/CreateUser";
 import settings from '../../assets/settings.png';
+import CreateClasses from "../../components/CreateClasses";
+import {Link} from "react-router-dom";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -63,7 +65,7 @@ const MenuAdmin = () => {
             <Typography>Регистрация учеников</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <CreateUser />
+            <CreateUser role={'student'}/>
           </AccordionDetails>
         </Accordion>
         <Accordion defaultExpanded={false} sx={{ marginBottom: '1.5rem' }} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -71,7 +73,7 @@ const MenuAdmin = () => {
             <Typography>Регистрация учителей</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <CreateUser />
+            <CreateUser role={'teacher'}/>
           </AccordionDetails>
         </Accordion>
         <Accordion defaultExpanded={false} sx={{ marginBottom: '1.5rem' }} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -79,12 +81,29 @@ const MenuAdmin = () => {
             <Typography>Регистрация модераторов</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <CreateUser />
+            <CreateUser role={'moderator'}/>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion defaultExpanded={false} sx={{ marginBottom: '1.5rem' }} expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+          <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
+            <Typography>Cоздание классов</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <CreateClasses />
           </AccordionDetails>
         </Accordion>
       </Grid>
-      <Grid sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item md={5}>
-        <MenuCard card={{ title: 'Управление классами', imageSrc: settings}} />
+      <Grid sx={{margin: '6px 0 0 10px'}}>
+      <Grid sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}} item md={5}>
+        <Link to={'/classSettings'}>
+          <MenuCard card={{ title: 'Управление классами', imageSrc: settings}} />
+        </Link>
+      </Grid>
+      <Grid sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}} item md={5}>
+        <Link to={'/allUsers'}>
+          <MenuCard card={{ title: 'Список пользователей', imageSrc: settings}} />
+        </Link>
+      </Grid>
       </Grid>
     </Grid>
   )

@@ -44,7 +44,7 @@ const Header = ({setRole}) => {
             <PersonIcon onClick={() => setRole('user')} />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            School Platform
+            Дистанционная школа
           </Typography>
           <div>
             <IconButton

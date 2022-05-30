@@ -1,5 +1,8 @@
-import { action, observable, makeObservable } from 'mobx';
+import { action, observable, makeObservable, toJS } from 'mobx';
 import { api } from '../../config';
+import StudentsStore from '../Students/Students'
+import TeachersStore from '../Teachers/Teachers'
+import ModeratorsStore from '../Moderators/Moderators'
 
 class AuthStore {
   @observable message = null
@@ -16,8 +19,13 @@ class AuthStore {
 //   ProjectStore = {}
   storageName = 'userData'
 
+
   constructor() {
     makeObservable(this);
+
+    this.StudentsStore = new StudentsStore({})
+    this.TeachersStore = new TeachersStore({})
+    this.ModeratorsStore = new ModeratorsStore({})
   }
  
 
@@ -54,6 +62,7 @@ class AuthStore {
 
       const response = await fetch(url, { method, body, headers })
 
+
       const data = await response.json()
 
       if (!response.ok) {
@@ -71,12 +80,13 @@ class AuthStore {
     this.setUserData({ ...this.userData, [event.target.name]: event.target.value })
   }
 
-  @action loginHandler = async () => {
+  loginHandler = async () => {
     try {
       const data = await this.request(`${api}/api/auth/login`, 'POST', { ...this.userData })
+
       this.login(data.token, data.userId)
     } catch (e) {
-      console.error('Что-то пошло не так')
+        console.error('Что-то пошло не так')
     }
   }
 
@@ -84,11 +94,16 @@ class AuthStore {
   @action registerHandler = async (entity) => {
     try {
       const data = await this.request(`${api}/api/auth/${entity}Reg`, 'POST', { ...this.userData })
-    //   this.setMessage(data.message)
-      alert(date.message)
-    //   this.setOpen({ openSnack: true, variant: 'success' })
-    //   history.push('/session/signin')
+      alert(data.message)
+
+      this.setUserData({})
+
+      this.StudentsStore.getStudents()
+      this.TeachersStore.getTeachers()
+      this.ModeratorsStore.getModerators()
+
     } catch (e) {
+      console.log(e)
       console.error('Что-то пошло не так');
     }
   }
@@ -116,10 +131,10 @@ class AuthStore {
         { 'Authorization': `Bearer ${token}` }
       )
 
-      this.setUser(data.user)
+      this.setUser(data)
       this.setUserData({})
     //   this.setMessage(data.message)
-      this.setAuth(data.isAuth)
+      this.setAuth(true)
     } catch (e) {
       console.log(e)
     }

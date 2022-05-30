@@ -18,19 +18,3 @@
     flex-direction: row;
     justify-content: space-between;
 }
-
-.card {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.card > div {
-    margin: 0 4rem 4rem 4rem !important;
-}
-
-.accordion {
-    width: 60%;
-}

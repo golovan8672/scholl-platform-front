@@ -10,6 +10,7 @@ import s from './MenuCard.scss'
 import clsx from 'clsx'
 import { Box } from '@mui/material';
 import Tilt from 'react-vanilla-tilt'
+import { Navigate } from 'react-router-dom';
 
 const MenuCard = ({ card }) => {
   const {
@@ -19,7 +20,7 @@ const MenuCard = ({ card }) => {
   } = card;
 
   return (
-    <Tilt options={{ scale: 2, max: 35,  perspective: 100 }}>
+    <Tilt options={{ scale: 2, max: 35,  perspective: 100}}>
       <div className={s.cardWrap}>
         <div className={clsx(s.cardContainer, s.containerDef)}>
           <div className={s.content}>
