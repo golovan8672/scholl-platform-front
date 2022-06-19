@@ -1,23 +1,21 @@
 import { action, observable, makeObservable, autorun, toJS } from 'mobx';
 import { api } from '../../config';
-import AuthStore from '../Auth/Auth';
 
-class ChatsStore {
-  @observable chats = {}
-  @observable chat = {}
+class TaskStore {
+  @observable tasks = []
   
   
   constructor() {
       makeObservable(this);
 
-
-    //   autorun(() => this.getChat())
+      autorun(() => this.getTasks())
     }
     
 
-  @action setChat = (chat) => {
-    this.chat = chat
+  @action setTasks = (tasks) => {
+    this.tasks = tasks
   }
+
 
   request = async (url, method = 'GET', body = null, headers = {}, mode = 'no-cors') => {
     try {
@@ -26,9 +24,12 @@ class ChatsStore {
         headers['Content-type'] = 'application/json'
       }
 
+      
       const response = await fetch(url, { method, body, headers })
 
       const data = await response.json()
+
+      console.log(data)
 
       if (!response.ok) {
         throw new Error(data.message || 'Что-то пошло не так')
@@ -40,33 +41,33 @@ class ChatsStore {
     }
   }
 
-  addMessage = async (classNumber, message) => {
+
+  addTask = async (taskData) => {
+    console.log(taskData)
     try {
-      const data = await this.request(`${api}/api/chat/${classNumber}/addMessage`, 'POST', message)
+      const data = await this.request(`${api}/api/task/addTask`, 'POST', taskData)
       
-      this.getChat(classNumber)
+      this.getTasks()
+      alert(data.message)
     } catch (e) {
       console.log(e)
       console.error('Что-то пошло не так');
     }
   }
 
-  getChat = async (classNumber) => {
+  getTasks = async () => {
     try {
-      console.log(classNumber)
       const data = await this.request(
-        `${api}/api/chat/${classNumber}`,
+        `${api}/api/task/getTasks`,
         'GET',
         null
       )
 
-      console.log(data)
-
-      this.setChat(data)
+      this.setTasks(data)
     } catch (e) {
       console.log(e)
     }
   }
 }
 
-export default ChatsStore
+export default TaskStore

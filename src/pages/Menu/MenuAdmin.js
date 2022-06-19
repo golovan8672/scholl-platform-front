@@ -11,7 +11,6 @@ import MenuCard from "../../components/MenuCard";
 import CreateUser from "../../components/CreateUser";
 import settings from '../../assets/settings.png';
 import CreateClasses from "../../components/CreateClasses";
-import {Link} from "react-router-dom";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -95,14 +94,10 @@ const MenuAdmin = () => {
       </Grid>
       <Grid sx={{margin: '6px 0 0 10px'}}>
       <Grid sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}} item md={5}>
-        <Link to={'/classSettings'}>
-          <MenuCard card={{ title: 'Управление классами', imageSrc: settings}} />
-        </Link>
+          <MenuCard card={{ title: 'Управление классами', imageSrc: settings, description: '/classSettings'}} />
       </Grid>
       <Grid sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}} item md={5}>
-        <Link to={'/allUsers'}>
-          <MenuCard card={{ title: 'Список пользователей', imageSrc: settings}} />
-        </Link>
+          <MenuCard card={{ title: 'Список пользователей', imageSrc: settings, description: '/allUsers'}} />
       </Grid>
       </Grid>
     </Grid>

@@ -8,6 +8,11 @@ import StyleContext from 'isomorphic-style-loader/StyleContext';
 import AllUsersPage from './pages/AllUsersPage'
 import ClassSettings from './pages/ClassSettings'
 import ClassChat from './pages/ClassChat';
+import Tasks from './pages/TasksPages'
+import Schedule from './pages/SchedulePage'
+import AddTaskView from './pages/TasksPages/AddTask';
+import Task from './pages/TasksPages/TaskItem'
+import TaskGrade from './pages/TasksPages/TaskGrade';
 
 const App = () => {
   const { stores } = configureStore();
@@ -27,10 +32,15 @@ const AppContext = {
           <BrowserRouter>
             <Routes>
                   <Route path={'/'} element={<Login />} />
-                  {/* <Route path={'/'} element={<Menu />} /> */}
+                  <Route path={'/menu'} element={<Menu />} />
+                  <Route path={'/classSettings'} element={<ClassSettings />} />
+                  <Route path={'/allUsers'} element={<AllUsersPage />} />
                   <Route path={'/classChat'} element={<ClassChat />} />
-                  {/* <Route path={'/allUsers'} element={<AllUsersPage />} /> */}
-                  {/* <Route path={'/classSettings'} element={<ClassSettings />} /> */}
+                  <Route path={'/schedule'} element={<Schedule />} />
+                  <Route path={'/tasks'} element={<Tasks />} />
+                  <Route path={'/addTask'} element={<AddTaskView />} />
+                  <Route path={'/task/:tasksId'} element={<Task />} />
+                  <Route path={'/homework/:homeworkId'} element={<TaskGrade />} />
             </Routes>
           </BrowserRouter>
       </Provider>

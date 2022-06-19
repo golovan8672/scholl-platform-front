@@ -16,6 +16,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import ScheduleView from './ScheduleView';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -74,23 +77,54 @@ const ClassSettingsView = (props) => {
     addStudentInClass,
     addTeacherInClass,
     deleteStudentIntoClass,
-    deleteTeacherIntoClass
+    deleteTeacherIntoClass,
+    schedules,
+    addSchedule,
+    updateSchedule
   } = props
 
+  
   const [expanded, setExpanded] = React.useState('panel1');
   const [classNum, setClassNumber] = React.useState('');
-
+  
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  
   const handleSelect = (event) => {
     setClassNumber(event.target.value);
   };
+  
+  const schedule = schedules.find(({classNumber}) => classNumber === classNum)
+
+  console.log(schedule, schedules)
+
+  const scheduleView = schedule ? (
+  <ScheduleView 
+    classNumber={classNum}
+    schedule={schedule}
+    addSchedule={addSchedule}
+    updateSchedule={updateSchedule}
+  />
+  ) : (
+  <Button
+    sx={{
+      maxWidth: '220px',
+     }}
+    variant="contained"
+    onClick={() => addSchedule(classNum)}
+  >
+    Создать расписание расписание
+  </Button>
+  )
+  const [tabsValue, setTabsValue] = React.useState('one');
+
+  const handleChangeTabs = (event, newValue) => {
+    setTabsValue(newValue);
+  };
 
   const isHaveTeacher = teachers.some(({classNumber}) => classNumber === classNum)
-
-  console.log(isHaveTeacher)
 
     return (
         <Body>
@@ -185,6 +219,18 @@ const ClassSettingsView = (props) => {
                     </Select>
                   </FormControl>
                 </Box>
+                <Box sx={{margin: '20px 0'}}>
+                <Tabs
+                  value={tabsValue}
+                  onChange={handleChangeTabs}
+                >
+                  <Tab
+                    value="one"
+                    label="Классый состав"
+                  />
+                  <Tab value='two' label="Расписание" />
+                </Tabs>
+                </Box>
                 <Grid 
                 sx={{ 
                   display: 'flex',
@@ -193,7 +239,10 @@ const ClassSettingsView = (props) => {
                   width: '100%'
                 }} 
                 item md={5}>
-                <Box sx={{ width: '100%', marginRight: '10px' }}>
+                { 
+                  tabsValue === 'one' ?
+                  <React.Fragment>
+                  <Box sx={{ width: '100%', marginRight: '10px' }}>
                     <Typography variant={'h4'} sx={{marginBottom: '10px'}}>{'Ученики'}</Typography>
                     <Stack 
                        spacing={2} 
@@ -268,7 +317,10 @@ const ClassSettingsView = (props) => {
                         })}
                     </Stack>
                   </Box>
-                  </Grid>
+                  </React.Fragment>
+                  : scheduleView
+                }
+              </Grid>
             </Grid>
         </Body>
     )

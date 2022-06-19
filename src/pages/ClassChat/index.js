@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {inject} from 'mobx-react';
 import ClassChatView from './ClassChatView';
 import { toJS } from 'mobx';
+import { Navigate } from 'react-router-dom';
 
 @inject(({StudentsStore, TeachersStore, AuthStore, ChatsStore}) => {
   return {
@@ -9,7 +10,8 @@ import { toJS } from 'mobx';
     teachers: TeachersStore.teachers,
     user: AuthStore.user,
     getChat: ChatsStore.getChat,
-    chat: ChatsStore.chat
+    chat: ChatsStore.chat,
+    addMessage: ChatsStore.addMessage
   }
 })
 
@@ -24,11 +26,11 @@ class ClassChat extends Component {
       students,
       teachers,
       user,
-      chat 
+      chat,
+      addMessage
     } = this.props;
 
-
-    console.log(toJS(chat))
+    if (!user.classNumber) return <Navigate to={'/'} />
 
     return (
       <React.Fragment>
@@ -37,6 +39,7 @@ class ClassChat extends Component {
           teachers={teachers}
           user={user}
           chat={chat}
+          addMessage={addMessage}
         />
       </React.Fragment>
     )

@@ -16,19 +16,24 @@ import {
 import SendIcon from '@mui/icons-material/Send'; 
 import Body from '../Body'  
 
-const ClassChatView = ({students, user, teachers, chat}) => {
+const ClassChatView = ({students, user, teachers, chat, addMessage}) => {
 
-    // const classMatesView = students.map(({fio, classNumber, id}) => { 
-    //     if (user.classNumber === classNumber && userId !== id) { 
-    //         return (
-    //             <Item>
-    //                 <Typography variant={'h6'} sx={{marginBottom: '10px'}}>
-    //                     {fio}
-    //                 </Typography>
-    //             </Item>
-    //         )}
-    //      }
-    //    )
+    var options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+      }
+      
+    const getDate = (str) =>  {
+        let date = new Date(str);
+        return date.toLocaleString('ru', options)
+    }
+
+    const dateNow = new Date().toLocaleString()
+
+    const [message, setMessage] = React.useState('')
+
+    const teacher = teachers.find(({classNumber}) => classNumber === chat.classNumber)
 
     return (
         <Body>
@@ -38,41 +43,43 @@ const ClassChatView = ({students, user, teachers, chat}) => {
                 component={Paper} 
                 sx={{
                     width: '100%',
-                    height: '80vh'
+                    height: '100%'
                 }}
             >
-                <Grid item xs={3} sx={{borderRight: '1px solid #e0e0e0'}}>
+                <Grid item xs={3} sx={{borderRight: '1px solid #e0e0e0', width: '1000px'}}>
                     <List>
                         <ListItem>
                             <ListItemIcon>
                             <Avatar />
                             </ListItemIcon>
-                            <ListItemText primary="John Wick"></ListItemText>
+                            <ListItemText primary={user.fio}></ListItemText>
                         </ListItem>
                     </List>
                     <Divider />
+                    <Typography variant='h5' sx={{padding: '20px'}}>{'Классный руководитель'}</Typography>
+                    <Divider />
+                    <ListItem>
+                        <ListItemIcon>
+                            <Avatar />
+                        </ListItemIcon>
+                        <ListItemText>{teacher?.fio}</ListItemText>
+                    </ListItem>
+                    <Divider />
                     <Typography variant='h5' sx={{padding: '20px'}}>{'Мои одноклассники'}</Typography>
                     <Divider />
-                    <List sx={{width: '1000px'}}>
-                        <ListItem>
-                            <ListItemIcon>
-                                <Avatar />
-                            </ListItemIcon>
-                            <ListItemText>Remy Sharp</ListItemText>
-                            <ListItemText secondary="online" align="right"></ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                <Avatar />
-                            </ListItemIcon>
-                            <ListItemText primary="Alice">Alice</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                <Avatar />
-                            </ListItemIcon>
-                            <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
-                        </ListItem>
+                    <List>
+                        {
+                        students.map(({fio}) => {
+                         if (fio !== user.fio) {
+                        return (
+                            <ListItem>
+                                <ListItemIcon>
+                                    <Avatar />
+                                </ListItemIcon>
+                                <ListItemText>{fio}</ListItemText>
+                            </ListItem>
+                         )}
+                        })}
                     </List>
                 </Grid>
                 <Grid item xs={9}>
@@ -82,74 +89,42 @@ const ClassChatView = ({students, user, teachers, chat}) => {
                         overflowY: 'auto'
                       }}
                         >
+                        {chat.messages?.map(({authorFio, date, message}) => {
+                           const isUser = authorFio === user.fio;
+                        return (
                         <ListItem key="1">
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
+                                    <ListItemText align={isUser ? 'right' : 'left'} sx={{'& span':
+                                     {fontSize: '16px', fontWeight: 'bold'}
+                                    }}>{authorFio}</ListItemText>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="09:30"></ListItemText>
+                                    <ListItemText align={isUser ? 'right' : 'left'} sx={{'& span':
+                                     {fontSize: '16px'}
+                                    }}>{message}</ListItemText>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <ListItemText align={isUser ? 'right' : 'left'} sx={{'& span':
+                                     {fontSize: '14px', fontWeight: '400', color: 'gray'}
+                                    }}>{getDate(date)}</ListItemText>
                                 </Grid>
                             </Grid>
                         </ListItem>
-                        <ListItem key="2">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Hey, Iam Good! What about you ?"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" secondary="09:31"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
-                        <ListItem key="3">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="10:30"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
+                         )})}
                     </List>
                     <Divider />
                     <Grid container style={{padding: '20px'}}>
                         <Grid item xs={11}>
-                            <TextField id="outlined-basic-email" placeholder='Написать' fullWidth />
+                            <TextField id="outlined-basic-email" placeholder='Написать' fullWidth value={message} onChange={(event) => setMessage(event.target.value)} />
                         </Grid>
                         <Grid xs={1} align="right">
-                            <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                            <Fab onClick={() =>{addMessage(chat.classNumber,{authorFio: user.fio, message, dateNow}), setMessage('')}} color="primary" aria-label="add"><SendIcon /></Fab>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
           </Box>
-            {/* <Grid 
-                sx={{ 
-                  display: 'flex',
-                  alignItemsr: 'center',
-                  cursor: 'pointer',
-                  width: '100%'
-                }} 
-                item md={5}>
-                 <Box sx={{ width: '100%', marginRight: '10px' }}>
-                    <Typography variant={'h4'} sx={{marginBottom: '10px'}}>{'Мои одноклассники'}</Typography>
-                    <Stack 
-                       spacing={2} 
-                       sx={{background: 'ghostwhite', padding: '10px'}}>
-                       {classMatesView}
-                    </Stack>
-                 </Box>
-                 <Box sx={{ width: '100%', marginRight: '10px' }}>
-                    <Typography variant={'h4'} sx={{marginBottom: '10px'}}>{'Чат с классным руководителем'}</Typography>
-                    <Stack 
-                       spacing={2} 
-                       sx={{background: 'ghostwhite', padding: '10px'}}>
-                        
-                    </Stack>
-                 </Box>
-            </Grid> */}
         </Body>
     )
 }

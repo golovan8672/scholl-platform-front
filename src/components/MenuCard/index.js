@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import { Box } from '@mui/material';
 import Tilt from 'react-vanilla-tilt'
 import { Navigate } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 const MenuCard = ({ card }) => {
   const {
@@ -21,6 +22,7 @@ const MenuCard = ({ card }) => {
 
   return (
     <Tilt options={{ scale: 2, max: 35,  perspective: 100}}>
+      <Link to={description}>
       <div className={s.cardWrap}>
         <div className={clsx(s.cardContainer, s.containerDef)}>
           <div className={s.content}>
@@ -29,6 +31,7 @@ const MenuCard = ({ card }) => {
           </div>
         </div>
       </div>
+      </Link>
     </Tilt>
 
   );

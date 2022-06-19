@@ -21,7 +21,7 @@ const Login = (props) => {
     isAuthenticated,
   } = props;
 
-  if (isAuthenticated) return <Navigate to={'/classChat'} />
+  if (isAuthenticated) return <Navigate to={'/menu'} />
 
   return (
     <ThemeProvider theme={theme}>

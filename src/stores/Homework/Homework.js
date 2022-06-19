@@ -1,23 +1,21 @@
 import { action, observable, makeObservable, autorun, toJS } from 'mobx';
 import { api } from '../../config';
-import AuthStore from '../Auth/Auth';
 
-class ChatsStore {
-  @observable chats = {}
-  @observable chat = {}
+class HomeworkStore {
+  @observable homeworks = []
   
   
   constructor() {
       makeObservable(this);
 
-
-    //   autorun(() => this.getChat())
+      autorun(() => this.getHomeworks())
     }
     
 
-  @action setChat = (chat) => {
-    this.chat = chat
+  @action setHomeworks = (homeworks) => {
+    this.homeworks = homeworks
   }
+
 
   request = async (url, method = 'GET', body = null, headers = {}, mode = 'no-cors') => {
     try {
@@ -26,9 +24,12 @@ class ChatsStore {
         headers['Content-type'] = 'application/json'
       }
 
+      
       const response = await fetch(url, { method, body, headers })
 
       const data = await response.json()
+
+      console.log(data)
 
       if (!response.ok) {
         throw new Error(data.message || 'Что-то пошло не так')
@@ -40,33 +41,44 @@ class ChatsStore {
     }
   }
 
-  addMessage = async (classNumber, message) => {
+
+  addHomework = async (homeworkData) => {
     try {
-      const data = await this.request(`${api}/api/chat/${classNumber}/addMessage`, 'POST', message)
+      const data = await this.request(`${api}/api/homework/addHomework`, 'POST', homeworkData)
       
-      this.getChat(classNumber)
+      this.getHomeworks()
+      alert(data.message)
     } catch (e) {
       console.log(e)
       console.error('Что-то пошло не так');
     }
   }
 
-  getChat = async (classNumber) => {
+  setMark = async (id, markData) => {
     try {
-      console.log(classNumber)
+        const data = await this.request(`${api}/api/homework/setMark/${id}`, 'PUT', {markData})
+        
+        this.getHomeworks()
+        alert(data.message)
+      } catch (e) {
+        console.log(e)
+        console.error('Что-то пошло не так');
+      }
+  }
+
+  getHomeworks = async () => {
+    try {
       const data = await this.request(
-        `${api}/api/chat/${classNumber}`,
+        `${api}/api/homework/getHomeworks`,
         'GET',
         null
       )
 
-      console.log(data)
-
-      this.setChat(data)
+      this.setHomeworks(data)
     } catch (e) {
       console.log(e)
     }
   }
 }
 
-export default ChatsStore
+export default HomeworkStore

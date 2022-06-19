@@ -1,23 +1,21 @@
 import { action, observable, makeObservable, autorun, toJS } from 'mobx';
 import { api } from '../../config';
-import AuthStore from '../Auth/Auth';
 
-class ChatsStore {
-  @observable chats = {}
-  @observable chat = {}
+class ScheduleStore {
+  @observable schedule = []
   
   
   constructor() {
       makeObservable(this);
 
-
-    //   autorun(() => this.getChat())
+      autorun(() => this.getSchedules())
     }
     
 
-  @action setChat = (chat) => {
-    this.chat = chat
+  @action setSchedules= (schedule) => {
+    this.schedule = schedule
   }
+
 
   request = async (url, method = 'GET', body = null, headers = {}, mode = 'no-cors') => {
     try {
@@ -40,33 +38,46 @@ class ChatsStore {
     }
   }
 
-  addMessage = async (classNumber, message) => {
+  addSchedule = async (classNumber) => {
     try {
-      const data = await this.request(`${api}/api/chat/${classNumber}/addMessage`, 'POST', message)
+      const data = await this.request(`${api}/api/schedule/addSchedule`, 'POST', {classNumber})
       
-      this.getChat(classNumber)
+      alert(data.message)
+      this.getSchedules()
     } catch (e) {
       console.log(e)
       console.error('Что-то пошло не так');
     }
   }
 
-  getChat = async (classNumber) => {
+  updateSchedule = async (scheduleId, day, subjects) => {
+      console.log(day)
     try {
-      console.log(classNumber)
+      const data = await this.request(`${api}/api/schedule/updateSchedule/${scheduleId}`, 'PUT', {day, subjects})
+      
+      alert(data.message)
+      this.getSchedules()
+    } catch (e) {
+      console.log(e)
+      console.error('Что-то пошло не так');
+    }
+  }
+
+  getSchedules = async () => {
+    try {
       const data = await this.request(
-        `${api}/api/chat/${classNumber}`,
+        `${api}/api/schedule/getSchedules`,
         'GET',
         null
       )
 
       console.log(data)
 
-      this.setChat(data)
+      this.setSchedules(data)
     } catch (e) {
       console.log(e)
     }
   }
 }
 
-export default ChatsStore
+export default ScheduleStore

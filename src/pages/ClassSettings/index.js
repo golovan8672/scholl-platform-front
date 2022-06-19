@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {inject} from 'mobx-react';
 import ClassSettingsView from './ClassSettingsView';
 
-@inject(({ClassroomsStore, StudentsStore, TeachersStore}) => {
+@inject(({ClassroomsStore, StudentsStore, TeachersStore, ScheduleStore}) => {
   return {
     students: StudentsStore.students,
     addStudentInClass: StudentsStore.addStudentInClass,
@@ -10,7 +10,10 @@ import ClassSettingsView from './ClassSettingsView';
     classrooms: ClassroomsStore.classrooms,
     addTeacherInClass: TeachersStore.addTeacherInClass,
     deleteStudentIntoClass: StudentsStore.deleteStudentIntoClass,
-    deleteTeacherIntoClass: TeachersStore.deleteTeacherIntoClass
+    deleteTeacherIntoClass: TeachersStore.deleteTeacherIntoClass,
+    schedule: ScheduleStore.schedule,
+    addSchedule: ScheduleStore.addSchedule,
+    updateSchedule: ScheduleStore.updateSchedule
   }
 })
 
@@ -23,7 +26,10 @@ class ClassSettings extends Component {
       addStudentInClass,
       addTeacherInClass,
       deleteStudentIntoClass,
-      deleteTeacherIntoClass
+      deleteTeacherIntoClass,
+      schedule,
+      addSchedule,
+      updateSchedule
     } = this.props;
 
     return (
@@ -36,6 +42,9 @@ class ClassSettings extends Component {
           addTeacherInClass={addTeacherInClass}
           deleteStudentIntoClass={deleteStudentIntoClass}
           deleteTeacherIntoClass={deleteTeacherIntoClass}
+          schedules={schedule}
+          addSchedule={addSchedule}
+          updateSchedule={updateSchedule}
         />
       </React.Fragment>
     )

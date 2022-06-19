@@ -6,33 +6,45 @@ import ocenky from '../../assets/scale_1200.jpeg'
 import klass from '../../assets/klass.jpg'
 import raspisanie from '../../assets/raspisanie.jpeg'
 import news from '../../assets/news.png'
+import {inject} from 'mobx-react';
+import { Component } from "react";
 
-const userMenuContent = [
-    {
-        id: 1,
-        title: 'Новости',
-        imageSrc: news,
-        description: ''
-    },
-    {
-        id: 2,
-        title: 'Мой класс',
-        imageSrc: klass,
-        description: ''
-    },{
-        id: 3,
-        title: 'Мое расписание',
-        imageSrc: raspisanie,
-        description: ''
-    },{
-        id: 4,
-        title: 'Мои оценки',
-        imageSrc: ocenky,
-        description: ''
-    }
-]
+@inject(({AuthStore}) => {
+  return {
+    user: AuthStore.user,
+  }
+})
 
-const MenuUser = () => {
+class MenuUser extends Component  {
+    render(){
+
+        const {user} = this.props
+
+        const userMenuContent = [
+            {
+                id: 2,
+                title: 'Задания',
+                imageSrc: ocenky,
+                description: '/tasks'
+            }
+        ]
+
+            user.classNumber && userMenuContent.push(
+            {
+                id: 2,
+                title: 'Чат с классом',
+                imageSrc: klass,
+                description: '/classChat'
+            },
+            user.classNumber &&
+            {
+                id: 3,
+                title: 'Расписание',
+                imageSrc: raspisanie,
+                description: '/schedule'
+            }
+        )
+    
     return (
         <div className={s.card}>
             {
@@ -42,6 +54,6 @@ const MenuUser = () => {
             }
         </div>
     )
-}
+}}
 
 export default ws(s)(MenuUser)
